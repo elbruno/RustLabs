@@ -3,8 +3,7 @@
    Author      : Bruno Capuano
    Create Time : 2023 January
    Change Log  :
-   - Demo working with Actix as webserver
-   - Source Demo: https://actix.rs/docs/getting-started
+   - Demo working with arrays and println! macro
    
    The MIT License (MIT)
    Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -23,32 +22,34 @@
    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
    THE SOFTWARE.
 */
+fn main() {
+    // Declare array with weekdays
+    let days = [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+    ];
 
-use actix_web::{get, post, web, App, HttpResponse, HttpServer, Responder};
+    // print days triggers an error
+    // ^^^^ `[&str; 7]` cannot be formatted with the default formatter
+    // println!("{}", days);
 
-#[get("/")]
-async fn hello() -> impl Responder {
-    HttpResponse::Ok().body("Hola LATAM!")
-}
+    // print days in debug mode
+    println!("{:?}", days);
 
-#[post("/echo")]
-async fn echo(req_body: String) -> impl Responder {
-    HttpResponse::Ok().body(req_body)
-}
+    // print days in debug mode with a beautifier
+    println!("{:#?}", days);
 
-async fn manual_hello() -> impl Responder {
-    HttpResponse::Ok().body("Hey :D!")
-}
+    // Declare array, initialize all values to 0, length = 5
+    let bytes = [0; 5];
 
-#[actix_web::main]
-async fn main() -> std::io::Result<()> {
-    HttpServer::new(|| {
-        App::new()
-            .service(hello)
-            .service(echo)
-            .route("/hey", web::get().to(manual_hello))
-    })
-    .bind(("127.0.0.1", 8080))?
-    .run()
-    .await
+    // print bytes in debug mode
+    println!("{:?}", bytes);
+
+    // print bytes in debug mode with a beautifier
+    println!("{:#?}", bytes);
 }
