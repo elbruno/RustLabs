@@ -4,7 +4,7 @@ fn main() {
 
     loop {
         let mut line = String::new();
-        println!("Ingrese su nombre o 'q' para salir :");
+        println!("Ingrese su nombre o 'q' para salor :");
         let b1 = std::io::stdin().read_line(&mut line).unwrap();
         if line.trim() == "q" {
             //break;
