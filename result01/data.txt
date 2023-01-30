@@ -1,0 +1,13 @@
+// names and address sample data
+const names = [
+  'John',
+  'Paul',
+  'George',
+  'Ringo'
+]
+const addresses = [
+  '123 Main St',
+  '456 Maple Ave',
+  '789 Broadway',
+  '101 Elm St'
+]
