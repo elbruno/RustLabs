@@ -10,6 +10,7 @@ fn main() {
     // pick ace
     let ace = pets.get("Ace");
     println!("2 - {:?}", ace);
+    println!("3 - {:?}", ace.unwrap());
 
     // for loop iterating in pets with the keys "ace" and "jim"
     for pet_name in ["Ace", "Jim", "Bruno"].iter() {
@@ -18,6 +19,14 @@ fn main() {
             Some(pet_type) => println!("{} is a {}!", pet_name, pet_type),
             None => println!("There is no pet type for {:?}! :(", &pet),
         }
+    }
+
+    // if let
+    let pet_name = "Ace22";
+    if let Some(pet_type) = pets.get(pet_name) {
+        println!("{} is a {}!", pet_name, pet_type);
+    } else {
+        println!("There is no pet type for {} ! :(", pet_name);
     }
 }
 
