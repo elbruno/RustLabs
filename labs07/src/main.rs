@@ -32,9 +32,7 @@ fn main() {
     println!("Show current information");
     println!("{}", "-".repeat(50));
     for individual in &family {
-        println!("name : {:#?}", individual.name);
-        println!("age : {:#?}", individual.age);
-        println!("name : {:#?}", individual.genre);
+        println!("{:#?}", individual);
     }
     println!("{}", "-".repeat(50));
 
