@@ -5,14 +5,24 @@ struct Person {
     genre: char,
 }
 
+// implement Clone for Person struct
+impl Clone for Person {
+    fn clone(&self) -> Self {
+        Self {
+            name: self.name.clone(),
+            age: self.age,
+            genre: self.genre,
+        }
+    }
+}
+
 fn main() {
     // Vector of family members
     let mut family: Vec<Person> = Vec::new();
-
     family.push(Person {
-        name: "Frank".to_string(),
-        age: 23,
-        genre: 'M',
+        name: "Alice".to_string(),
+        age: 20,
+        genre: 'F',
     });
 
     family.push(Person {
@@ -36,32 +46,18 @@ fn main() {
     }
     println!("{}", "-".repeat(50));
 
-    // // Add family lastname
-    // for member in &family {
-    //     //member.name = member.name.pus  + "Thompson";
-    //     member.name.push_str("Thompson");
-    // }
+    // Iterate through Family and add a family lastname to the field name
+    for individual in &mut family {
+        individual.name = format!("{} {}", individual.name, "Thompson");
+    }
 
-    // // Increase age by 2
-    // for adult in &family {
-    //     adult.age += 2;
-    // }
+    println!("{}", "-".repeat(50));
+    println!("Show new information after adding the last name");
+    println!("{}", "-".repeat(50));
+    for individual in &family {
+        println!("{:#?}", individual);
+    }
+    println!("{}", "-".repeat(50));
 
-    // // Show updated info
-    // println!("{}", "-".repeat(50));
-    // for individual in &family {
-    //     match individual.genre {
-    //         'M' => {
-    //             println!("{} is a man {} years old", individual.name, individual.age);
-    //         }
-    //         'F' => {
-    //             println!(
-    //                 "{} is a woman {} years old",
-    //                 individual.name, individual.age
-    //             );
-    //         }
-    //         _ => { // all cases goes here
-    //         }
-    //     }
-    // }
+    // rest of the code goes here ...
 }
