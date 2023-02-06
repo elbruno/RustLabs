@@ -1,31 +1,40 @@
+/*
+   Copyright (c) 2023
+   Author      : Bruno Capuano
+   Create Time : 2023 Feb
+   Change Log  :
+   - Demo learning with HTTP GET and POST request with Rust
+   - Source Demo: https://actix.rs/docs/getting-started
+
+   The MIT License (MIT)
+   Permission is hereby granted, free of charge, to any person obtaining a copy
+   of this software and associated documentation files (the "Software"), to deal
+   in the Software without restriction, including without limitation the rights
+   to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+   copies of the Software, and to permit persons to whom the Software is
+   furnished to do so, subject to the following conditions:
+   The above copyright notice and this permission notice shall be included in
+   all copies or substantial portions of the Software.
+   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+   IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+   FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+   AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+   LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+   THE SOFTWARE.
+*/
+
 use reqwest;
 use std::collections::HashMap;
 
-// tokio let's us use "async" on our main function
 #[tokio::main]
-//async fn main() {
-    // let response = reqwest::get(" https://v2.jokeapi.dev/joke/Any")        
-    // .await
-    // .unwrap()
-    // .text()
-    // .await;
-    // println!("{:?}", response);
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-        // Build the client using the builder pattern
-        let client = reqwest::Client::builder()
-        .build()?;
-
-    // Perform the actual execution of the network request
-    let res = client
-        .get("https://httpbin.org/ip")
+    let client = reqwest::Client::builder().build()?;
+    let res = client.get("https://httpbin.org/ip")
         .send()
         .await?;
+    let ip = res.json::<HashMap<String, String>>().await?;
 
-    // Parse the response body as Json in this case
-    let ip = res
-        .json::<HashMap<String, String>>()
-        .await?;
-
-    println!("{:?}", ip);
+    println!("{:#?}", ip);
     Ok(())
 }
