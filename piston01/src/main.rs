@@ -10,7 +10,7 @@ fn main() {
         window.draw_2d(&event, |context, graphics, _device| {
             clear([1.0; 4], graphics);
             rectangle([1.0, 0.0, 0.0, 1.0], // red
-                      [0.0, 0.0, 100.0, 100.0],
+                      [10.0, 10.0, 100.0, 100.0],
                       context.transform,
                       graphics);
         });
